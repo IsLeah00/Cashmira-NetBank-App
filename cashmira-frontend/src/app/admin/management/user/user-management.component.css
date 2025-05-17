@@ -1,0 +1,52 @@
+@import '../../home/admin-home.component.css';
+
+.full-width {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.user-details-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.transaction-history {
+  flex: 1;
+}
+
+.toggle-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  padding-top: 180px;
+}
+
+.small-table {
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+.small-table th, .small-table td {
+  padding: 6px 12px;
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clickable-row:hover {
+  background-color: #e9dbd0;
+}
+
+.selected-row {
+  background-color: #e9dbd0 !important;
+}
+
+.history-row:hover {
+  background-color: #ebe1da60 !important;
+}

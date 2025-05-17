@@ -1,0 +1,23 @@
+mat-dialog-content {
+  color: #5A2A27;
+  font-size: 15px;
+}
+
+mat-dialog-title {
+  color: #806a55;
+  font-weight: 600;
+}
+
+mat-dialog-actions {
+  margin-top: 20px;
+}
+
+button[mat-button] {
+  margin: 10px;
+  padding: 10px;
+}
+
+button[color="warn"] {
+  background-color: #5A2A27;
+  color: #fff;
+}

@@ -1,0 +1,115 @@
+<div class="user-wrapper">
+  <mat-toolbar color="primary" class="user-toolbar">
+    <img src="assets/images/cashmira.png" alt="Cashmira Logo" class="user-logo" />
+    <span class="user-title">Cashmira NetBank</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/dashboard">Home</a>
+    <a mat-button routerLink="/dashboard/transfer">Transfer</a>
+    <a mat-button routerLink="/dashboard/transactions">Transactions</a>
+    <a mat-button routerLink="/dashboard/card">Card Management</a>
+    <a mat-button routerLink="/dashboard/profile">Profile</a>
+    <a mat-button (click)="onLogoutClick()">Logout</a>
+  </mat-toolbar>
+
+  <div class="profile-content" [ngClass]="{ 'centered-only': !card }">
+    <mat-card class="profile-card">
+      <mat-card class="check-pin" *ngIf="!card">
+        <h2>Security Check</h2>
+      
+        <mat-form-field appearance="outline">
+          <mat-label>Enter PIN to view card details</mat-label>
+          <input matInput [type]="hidePin ? 'password' : 'text'" [(ngModel)]="pin" maxlength="4">
+          <button mat-icon-button matSuffix (click)="hidePin = !hidePin" type="button">
+            <mat-icon>{{ hidePin ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+      
+        <button mat-raised-button color="primary" (click)="viewCard()">View Card</button>
+      </mat-card>
+
+      <div *ngIf="card">
+        <h2>Card Information Settings</h2>
+
+        <div class="card-name-fields">
+          <mat-form-field appearance="outline">
+            <mat-label>Card Name</mat-label>
+            <input matInput [(ngModel)]="cardName">
+          </mat-form-field>
+          <button mat-raised-button color="accent" (click)="renameCard()">Rename Card</button>
+        </div>
+
+        <div class="fake-card">
+          <div class="fake-chip"></div>
+          <div class="card-number">{{ card.cardNumber }}</div>
+          <div class="card-row">
+            <div>
+              <label>CVV</label>
+              <div class="card-detail">{{ card.cvv }}</div>
+            </div>
+            <div>
+              <label>Expires</label>
+              <div class="card-detail">{{ card.expireDate }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="profile-card" *ngIf="card">
+      <h2>Limitation Settings</h2>
+
+      <h4>Daily ATM Withdrawal Limit</h4>
+      <div class="limit-fields">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Set New Limit</mat-label>
+          <input matInput type="number" [(ngModel)]="atmLimit">
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Current Limit</mat-label>
+          <input matInput [value]="card?.atmLimitDaily" readonly disabled>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" (click)="updateLimit('atm')">Update ATM Limit</button>
+
+      <h4>Daily Transfer Limit</h4>
+      <div class="limit-fields">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Set New Limit</mat-label>
+          <input matInput type="number" [(ngModel)]="transferLimit">
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Current Limit</mat-label>
+          <input matInput [value]="card?.transferLimitDaily" readonly disabled>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" (click)="updateLimit('transfer')">Update Transfer Limit</button>
+
+      <h4>Daily Purchase Limit</h4>
+      <div class="limit-fields">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Set New Limit</mat-label>
+          <input matInput type="number" [(ngModel)]="purchaseLimit">
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Current Limit</mat-label>
+          <input matInput [value]="card?.purchaseLimitDaily" readonly disabled>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" (click)="updateLimit('purchase')">Update Purchase Limit</button>
+
+      <div class="toggle-wrapper">
+        <h4 class="block-title">Block Card</h4>
+        <mat-slide-toggle
+          [(ngModel)]="isBlocked"
+          (change)="card && toggleBlockCard()"
+          class="custom-toggle"
+        >
+          {{ isBlocked ? 'Unblock' : 'Block' }}
+        </mat-slide-toggle>
+      </div>
+    </mat-card>
+  </div>
+</div>

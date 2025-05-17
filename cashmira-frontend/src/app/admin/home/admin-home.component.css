@@ -1,0 +1,65 @@
+.admin-wrapper {
+  height: 100vh;
+  background-color: #ccb7a3;
+  font-family: 'Roboto', sans-serif;
+}
+
+.admin-toolbar {
+  background-color: #806a55;
+  color: white;
+}
+
+.admin-logo {
+  height: 60px;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.admin-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.admin-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 40px;
+  gap: 30px;
+}
+
+.admin-card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.info-card {
+  width: 35%;
+  max-width: 400px;
+}
+
+.logs-card {
+  flex: 1;
+  min-width: 600px;
+  min-height: 400px;
+}
+
+table {
+  width: 100%;
+}
+
+mat-icon {
+  vertical-align: middle;
+}
+
+.default-icon {
+  color: #806a55;
+}

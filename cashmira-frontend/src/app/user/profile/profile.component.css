@@ -1,0 +1,68 @@
+@import '../home/user-home.component.css';
+
+h4 {
+  align-self: flex-start;
+  margin-bottom: 2px;
+}
+
+.profile-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  gap: 30px;
+}
+
+.profile-card {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  width: 25%;
+}
+
+.delete-button {
+  margin-top: 90px;
+  margin-bottom: 10px;
+}
+
+.update-button {
+  align-self: flex-start;
+}
+
+.password-checklist {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 16px;
+  align-self: flex-start;
+}
+
+.password-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: gray;
+}
+
+.password-checklist li.met {
+  color: #325a27b4;
+}
+
+.pin-fields {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.half-width {
+  flex: 1;
+}

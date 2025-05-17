@@ -1,0 +1,113 @@
+<div class="admin-wrapper">
+  <mat-toolbar color="primary" class="admin-toolbar">
+    <img src="assets/images/cashmira.png" alt="Cashmira Logo" class="admin-logo" />
+    <span class="admin-title">Admin Panel</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/admin">Home</a>
+    <a mat-button routerLink="/admin/registration">Registration Management</a>
+    <a mat-button routerLink="/admin/users">User Management</a>
+    <a mat-button (click)="onLogoutClick()">Logout</a>
+  </mat-toolbar>
+
+  <div class="admin-content">
+    <mat-card class="admin-card logs-card">
+      <h3>Active Users</h3>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Search by name or email</mat-label>
+        <input matInput [(ngModel)]="searchValue" (ngModelChange)="applyFilter()" />
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z2 full-width">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let user">
+            {{ user.firstName }} {{ user.lastName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef>Phone</th>
+          <td mat-cell *matCellDef="let user">{{ user.phone }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr 
+          mat-row
+          *matRowDef="let row; columns: displayedColumns;"
+          (click)="toggleExpand(row)"
+          class="clickable-row"
+          [class.selected-row]="row._id === expandedUserId">
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+
+      <div *ngIf="expandedUserId" class="user-details-section">
+        <div class="transaction-history">
+          <h4 style="margin-top: 30px;">
+            Transaction History of {{ selectedUser?.firstName }} {{ selectedUser?.lastName }}
+          </h4>
+          <table mat-table [dataSource]="transactionsMap[expandedUserId]" class="mat-elevation-z1 small-table">
+
+            <ng-container matColumnDef="payee">
+              <th mat-header-cell *matHeaderCellDef>Payee</th>
+              <td mat-cell *matCellDef="let tx">{{ tx.payee }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="invoice">
+              <th mat-header-cell *matHeaderCellDef>Invoice #</th>
+              <td mat-cell *matCellDef="let tx">{{ tx.invoiceNumber }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef>Amount</th>
+              <td mat-cell *matCellDef="let tx">{{ tx.amount }} {{ tx.currency }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="statement">
+              <th mat-header-cell *matHeaderCellDef>Statement</th>
+              <td mat-cell *matCellDef="let tx">{{ tx.statement }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="createdAt">
+              <th mat-header-cell *matHeaderCellDef>Date</th>
+              <td mat-cell *matCellDef="let tx">{{ tx.createdAt | date:'medium' }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['payee', 'invoice', 'amount', 'statement', 'createdAt']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['payee', 'invoice', 'amount', 'statement', 'createdAt'];" class="history-row"></tr>
+          </table>
+        </div>
+
+        <div class="toggle-controls">
+          <mat-slide-toggle 
+            color="warn"
+            [checked]="selectedUser?.suspended"
+            (change)="toggleField(selectedUser, 'suspended')">
+            {{ selectedUser?.suspended ? 'Unsuspend Account' : 'Suspend Account' }}
+          </mat-slide-toggle>
+
+          <mat-slide-toggle 
+            color="warn"
+            [checked]="selectedUser?.restricted"
+            (change)="toggleField(selectedUser, 'restricted')">
+            {{ selectedUser?.restricted ? 'Unrestrict Account' : 'Restrict Account' }}
+          </mat-slide-toggle>
+
+          <mat-slide-toggle 
+            color="warn"
+            [checked]="selectedUser?.restrictedTransfers"
+            (change)="toggleField(selectedUser, 'restrictedTransfers')">
+            {{ selectedUser?.restrictedTransfers ? 'Allow Transactions' : 'Restrict Transactions' }}
+          </mat-slide-toggle>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="user-wrapper">
+  <mat-toolbar color="primary" class="user-toolbar">
+    <img src="assets/images/cashmira.png" alt="Cashmira Logo" class="user-logo" />
+    <span class="user-title">Cashmira NetBank</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/dashboard">Home</a>
+    <a mat-button routerLink="/dashboard/transfer">Transfer</a>
+    <a mat-button routerLink="/dashboard/transactions">Transactions</a>
+    <a mat-button routerLink="/dashboard/card">Card Management</a>
+    <a mat-button routerLink="/dashboard/profile">Profile</a>
+    <a mat-button (click)="onLogoutClick()">Logout</a>
+  </mat-toolbar>
+
+  <div class="profile-content">
+    <mat-card class="profile-card">
+      <h2>Account Settings</h2>
+
+      <h4>Change Name</h4>
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput [(ngModel)]="firstName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput [(ngModel)]="lastName">
+      </mat-form-field>
+
+      <h4>Change Email</h4>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="email">
+      </mat-form-field>
+
+      <h4>Change Phone Number</h4>
+      <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input matInput [(ngModel)]="phone">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="savePersonalSettings()">Save Changes</button>
+    </mat-card>
+
+    <mat-card class="profile-card">
+      <h2>Security Settings</h2>
+
+      <h4>Change PIN code</h4>
+      <div class="pin-fields">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Current PIN</mat-label>
+          <input matInput [type]="hideCurrentPin ? 'password' : 'text'" [value]="currentPin" readonly disabled>
+          <button mat-icon-button matSuffix (click)="hideCurrentPin = !hideCurrentPin" type="button">
+            <mat-icon>{{ hideCurrentPin ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>New PIN</mat-label>
+          <input matInput [type]="hidePin ? 'password' : 'text'" [(ngModel)]="pin" maxlength="4">
+          <button mat-icon-button matSuffix (click)="hidePin = !hidePin" type="button">
+            <mat-icon>{{ hidePin ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" (click)="updatePin()" class="update-button">Update PIN</button>
+
+      <h4>Change Password</h4>
+      <mat-form-field appearance="outline">
+        <mat-label>Current Password</mat-label>
+        <input matInput [type]="hideOldPass ? 'password' : 'text'" [(ngModel)]="oldPassword" />
+        <button mat-icon-button matSuffix (click)="hideOldPass = !hideOldPass" [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="!hideOldPass">
+          <mat-icon>{{ hideOldPass ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>New Password</mat-label>
+        <input matInput [type]="hideNewPass ? 'password' : 'text'" [(ngModel)]="newPassword" (ngModelChange)="updatePasswordChecks()">
+        <button mat-icon-button matSuffix (click)="hideNewPass = !hideNewPass" [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="!hideNewPass">
+          <mat-icon>{{ hideNewPass ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <ul class="password-checklist">
+        <li [class.met]="checks.minLength">
+          <mat-icon>{{ checks.minLength ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+          At least 5 characters
+        </li>
+        <li [class.met]="checks.uppercase">
+          <mat-icon>{{ checks.uppercase ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+          Contains an uppercase letter
+        </li>
+        <li [class.met]="checks.lowercase">
+          <mat-icon>{{ checks.lowercase ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+          Contains a lowercase letter
+        </li>
+        <li [class.met]="checks.number">
+          <mat-icon>{{ checks.number ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+          Contains a number
+        </li>
+        <li [class.met]="checks.specialChar">
+          <mat-icon>{{ checks.specialChar ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+          Contains a special character
+        </li>
+      </ul>
+      <button mat-raised-button color="accent" (click)="updatePassword()" class="update-button">Update Password</button>
+
+      <button mat-raised-button color="warn" (click)="openDeleteDialog()" class="delete-button">Delete My Account</button>
+    </mat-card>
+  </div>
+</div>

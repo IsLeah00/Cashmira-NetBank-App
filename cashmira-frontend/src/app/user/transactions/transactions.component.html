@@ -1,0 +1,37 @@
+<div class="user-wrapper">
+  <mat-toolbar color="primary" class="user-toolbar">
+    <img src="assets/images/cashmira.png" alt="Cashmira Logo" class="user-logo" />
+    <span class="user-title">Cashmira NetBank</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/dashboard">Home</a>
+    <a mat-button routerLink="/dashboard/transfer">Transfer</a>
+    <a mat-button routerLink="/dashboard/transactions">Transactions</a>
+    <a mat-button routerLink="/dashboard/card">Card Management</a>
+    <a mat-button routerLink="/dashboard/profile">Profile</a>
+    <a mat-button (click)="onLogoutClick()">Logout</a>
+  </mat-toolbar>
+
+  <div class="transactions-content">
+    <mat-form-field class="search-bar" appearance="outline">
+      <mat-label>Search by date</mat-label>
+      <input matInput [(ngModel)]="searchDate" placeholder="e.g. 2025/04/10">
+    </mat-form-field>
+
+    <div *ngFor="let date of filteredDates()" class="transaction-group">
+      <h3 class="date-title">{{ date }}</h3>
+      <mat-card class="transaction-card" *ngFor="let tx of groupedTransactions[date]">
+        <div class="transaction-row">
+          <span class="amount" [ngClass]="{ 'negative': tx.amount < 0, 'positive': tx.amount > 0 }">
+            {{ tx.amount < 0 ? '-' : '+' }}{{ abs(tx.amount) }} {{ tx.currency }}
+          </span>
+          <span class="payee">{{ tx.payee }}</span>
+          <span class="invoice">Invoice: {{ tx.invoiceNumber }}</span>
+          <span class="time">{{ formatTime(tx.createdAt) }}</span>
+        </div>
+        <span class="statement" *ngIf="tx.statement">
+            {{ tx.statement || 'No additional note.' }}
+        </span>
+      </mat-card>
+    </div>
+  </div>
+</div>

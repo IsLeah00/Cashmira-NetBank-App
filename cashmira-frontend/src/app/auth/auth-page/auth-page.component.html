@@ -1,0 +1,15 @@
+<div class="auth-wrapper">
+  <div class="logo-container">
+    <img src="assets/images/cashmira.png" alt="Cashmira Logo" />
+  </div>
+
+  <mat-card>
+    <h2>{{ isLogin ? 'Login' : 'Register' }}</h2>
+    <ng-container *ngIf="isLogin; else register">
+      <app-login-form (switchMode)="toggleMode()"></app-login-form>
+    </ng-container>
+    <ng-template #register>
+      <app-register-form (switchMode)="toggleMode()"></app-register-form>
+    </ng-template>
+  </mat-card>
+</div>

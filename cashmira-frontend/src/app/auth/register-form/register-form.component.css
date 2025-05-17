@@ -1,0 +1,76 @@
+.full-width {
+  width: 100%;
+  margin-bottom: 3px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.switch-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: #806a55;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.switch-link:hover {
+  text-decoration: underline;
+  color: #5A2A27;
+}
+
+button[mat-raised-button] {
+  background: #806a55;
+  color: white;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+button[mat-raised-button]:hover {
+  background: #5A2A27;
+}
+
+mat-form-field {
+  color: #806a55;
+}
+
+.mat-mdc-form-field-error {
+  color: #5A2A27 !important;
+}
+
+mat-error {
+  font-size: 0.85rem;
+  color: #5A2A27;
+}
+
+.pin-field button {
+  margin-left: 4px;
+}
+
+.password-checklist {
+  list-style: none;
+  padding: 0;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.password-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 2px;
+}
+
+.password-checklist li.met {
+  color: #325A27;
+}
+
+.password-checklist mat-icon {
+  font-size: 18px;
+  vertical-align: middle;
+}

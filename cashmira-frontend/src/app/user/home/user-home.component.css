@@ -1,0 +1,80 @@
+@import '../../admin/home/admin-home.component.css';
+
+.user-wrapper {
+  background-color: #ccb7a3;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+.user-toolbar {
+  background-color: #806a55;
+  color: white;
+}
+
+.user-logo {
+  height: 60px;
+  margin-right: 12px;
+}
+
+.user-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-content {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px;
+  gap: 30px;
+}
+
+.user-card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.chart-card {
+  width: 35%;
+  max-width: 400px;
+}
+
+.table-card {
+  flex: 1;
+  min-width: 500px;
+}
+
+.user-transactions {
+  padding: 0 40px 40px 40px;
+}
+
+.small-table {
+  font-size: 13px;
+  margin-top: 16px;
+}
+
+.small-table th,
+.small-table td {
+  padding: 6px 12px;
+}
+
+.history-row:hover {
+  background-color: #ebe1da60 !important;
+}
+
+.latest-row:hover {
+  background-color: #ebdada60 !important;
+}
+
+canvas {
+  max-height: 280px;
+  display: block;
+  margin-top: 10px;
+}

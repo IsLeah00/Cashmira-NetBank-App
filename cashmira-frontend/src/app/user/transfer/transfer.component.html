@@ -1,0 +1,50 @@
+<div class="user-wrapper">
+  <mat-toolbar color="primary" class="user-toolbar">
+    <img src="assets/images/cashmira.png" alt="Cashmira Logo" class="user-logo" />
+    <span class="user-title">Cashmira NetBank</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/dashboard">Home</a>
+    <a mat-button routerLink="/dashboard/transfer">Transfer</a>
+    <a mat-button routerLink="/dashboard/transactions">Transactions</a>
+    <a mat-button routerLink="/dashboard/card">Card Management</a>
+    <a mat-button routerLink="/dashboard/profile">Profile</a>
+    <a mat-button (click)="onLogoutClick()">Logout</a>
+  </mat-toolbar>
+
+  <div class="profile-content">
+    <mat-card class="profile-card">
+      <h2>New Transaction</h2>
+
+      <h4>Recipient Name</h4>
+      <mat-form-field appearance="outline">
+        <mat-label>e.g. [First Name] [Last Name]</mat-label>
+        <input matInput [(ngModel)]="payee" required />
+      </mat-form-field>
+
+      <h4>Recipient Card Number</h4>
+      <mat-form-field appearance="outline">
+        <mat-label>e.g. XXXX-XXXX-XXXX-XXXX</mat-label>
+        <input matInput [(ngModel)]="toCardNumber" required />
+      </mat-form-field>
+
+      <h4>Amount</h4>
+      <mat-form-field appearance="outline">
+        <mat-label>Amount To Transfer</mat-label>
+        <input matInput type="number" [(ngModel)]="amount" required />
+      </mat-form-field>
+
+      <h4>Currency</h4>
+      <mat-form-field appearance="outline" disabled>
+        <input matInput value="CHF" disabled />
+      </mat-form-field>
+
+      <h4>Statement</h4>
+      <mat-form-field appearance="outline">
+        <mat-label>(Optional)</mat-label>
+        <textarea matInput rows="3" [(ngModel)]="statement"></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="submitTransfer()">Transfer</button>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Confirm Account Deletion</h2>
+
+<mat-dialog-content>
+  <p>Please type your password to confirm your account deletion.</p>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Password</mat-label>
+    <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="passwordInput" />
+    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="!hidePassword">
+      <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()" [disabled]="isDeleting">Cancel</button>
+  <button mat-raised-button color="warn" (click)="confirmDelete()" [disabled]="isDeleting">
+    {{ isDeleting ? 'Deleting...' : 'Delete' }}
+  </button>
+</mat-dialog-actions>

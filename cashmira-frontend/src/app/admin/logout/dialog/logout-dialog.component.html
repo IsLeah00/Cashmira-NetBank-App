@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Confirm Logout</h2>
+
+<mat-dialog-content>
+  <p>Are you sure you want to log out?</p>
+  <p>This will end your session and return you to the login screen.</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>No, stay</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="true">Yes, logout</button>
+</mat-dialog-actions>
