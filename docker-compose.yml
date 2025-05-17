@@ -1,0 +1,13 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: cashmira-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb/init.js:/docker-entrypoint-initdb.d/init.js:ro
+      - mongo_data:/data/db
+    restart: always
+
+volumes:
+  mongo_data:

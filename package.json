@@ -1,0 +1,15 @@
+{
+  "name": "cashmira-app",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "install": "yarn --cwd backend install && yarn --cwd cashmira-frontend install",
+    "start": "yarn db && concurrently -k -s first -n BACKEND,FRONTEND \"yarn --cwd backend run dev\" \"yarn --cwd cashmira-frontend start\"",
+    "db": "docker compose down -v && docker compose up -d && yarn wait:db",
+    "wait:db": "wait-on tcp:27017"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "wait-on": "^7.0.1"
+  }
+}
